@@ -54,6 +54,8 @@ console.log(getYears(getFinals, fifaData));
 
 /* Task 4: Implement a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
 
+
+
 function getWinners(getFinals, data) {
     let finals = getFinals(data);
     let winners = [];
@@ -72,6 +74,8 @@ return winners;
 
 console.log(getWinners(getFinals, fifaData));
 
+
+
 /* Task 5: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
 
 Parameters: 
@@ -79,29 +83,19 @@ Parameters:
  * callback function getYears
  */
 
+function getWinnersByYear(getWinners, getYears) {
+    let years = getYears;
+    let winners = getWinners;
+    data.map(function(item){
+        return `In ${years}, ${winners} won the world cup!`
+    });
+    return finals;
+};
 
-
-
-// function getWinnersByYear(getWinners, getYears, getFinals, data) {
-//     let finals = getFinals(data);
-//     let years = 
-//     let winners = 
-//     finals.map(function(item){
-//         return `In ${item.years}, ${item.winners} won the world cup!`
-//     });
-//     return finals;
-// };
-
-// console.log(getWinnersByYear(getWinners, getYears, getFinals, fifaData));
-
-
-
+console.log(getWinnersByYear(getWinners, getYears, getFinals, fifaData));
 
 
 /* Task 6: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
-
-
-
 
 
 function getAverageGoals(data) {
@@ -113,11 +107,14 @@ let average = {};
     const averageHome = data.reduce(function(accumulator, item){
         return (item['Home Team Goals'] + accumulator) / data.length;
     }, 0);
-    console.log(averageHome);
-console.log(averageAway);
+
+    average = { 'Home Average (per match)': averageHome, 
+    'Away Average (per match)': averageAway,
+    }
+    return average;
 };
 
-getAverageGoals(fifaData);
+console.log(getAverageGoals(fifaData));
 
 
 
@@ -130,13 +127,15 @@ getAverageGoals(fifaData);
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
-
-    /* code here */
+function getCountryWins(data, teamInitials) {
+    
+    data.reduce(function(item){
+        return 
+    });
 
 };
 
-getCountryWins();
+getCountryWins(fifaData, );
 
 
 /* Stretch 3: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
@@ -161,3 +160,29 @@ function badDefense(/* code here */) {
 badDefense();
 
 /* If you still have time, use the space below to work on any stretch goals of your chosing as listed in the README file. */
+
+
+// function getWinners(getFinals, data) {
+//     let finals = getFinals(data);
+//     let winners = [];
+
+//     finals.forEach(function(item){
+//         if(item['Home Team Goals'] === item['Away Team Goals']){
+//             return winners.push(item['Win conditions']);
+//         }
+//     });
+
+//     finals.forEach(function(item){
+//         if(item['Home Team Goals'] < item['Away Team Goals']){
+//             return winners.push(item['Away Team Name']);
+//     }
+// })
+//     finals.forEach(function(item){
+//         if(item['Home Team Goals'] > item['Away Team Goals']){
+//             return winners.push(item['Home Team Name'])
+//     }
+// });
+// return winners;
+// }
+
+// console.log(getWinners(getFinals, fifaData));
