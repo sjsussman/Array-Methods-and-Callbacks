@@ -62,13 +62,11 @@ function getWinners(getFinals, data) {
     finals.forEach(function(item){
         if(item['Home Team Goals'] < item['Away Team Goals']){
             return winners.push(item['Away Team Name']);
+    } else if (item['Home Team Goals'] > item['Away Team Goals']){
+                    return winners.push(item['Home Team Name'])
+
     }
 })
-    finals.forEach(function(item){
-        if(item['Home Team Goals'] > item['Away Team Goals']){
-            return winners.push(item['Home Team Name'])
-    }
-});
 return winners;
 }
 
@@ -101,15 +99,15 @@ console.log(getWinnersByYear(getWinners(getFinals, fifaData), getYears(getFinals
 function getAverageGoals(data) {
 let average = {};
     const averageAway = data.reduce(function(accumulator, item){
-        return (item['Away Team Goals'] + accumulator) / data.length;
+        return (item['Away Team Goals'] + accumulator);
     }, 0);
 
     const averageHome = data.reduce(function(accumulator, item){
-        return (item['Home Team Goals'] + accumulator) / data.length;
+        return (item['Home Team Goals'] + accumulator);
     }, 0);
  
-    average = { 'Home Average (per match)': averageHome, 
-    'Away Average (per match)': averageAway,
+    average = { 'Home Average (per match)': Math.round(averageHome / data.length), 
+    'Away Average (per match)': Math.round(averageAway / data.length),
     }
     return average;
 };
@@ -130,13 +128,25 @@ Hint: use `.reduce` */
 
 function getCountryWins(data, teamInitials) {
     
-    data.reduce(function(item){
-        return 
-    });
+   let countryWins = data.map(function(item){
+    if(item.Stage === 'Final'){
+        if(item['Home Team Goals'] > item['Away Team Goals']) {
+            return item['Home Team Initials']
+        } else if (item['Home Team Goals'] < item['Away Team Goals']) {
+            return item['Away Team Initials']
+        }
+    }
+   });
+   let count = countryWins.reduce(function(accumulator, item){
+        if(item === teamInitials){
+            return accumulator + 1 
+        }
+        
+   }, 0);
+   return count;
+}
 
-};
-
-getCountryWins(fifaData, );
+console.log(getCountryWins(fifaData, "BRA"));
 
 
 /* Stretch 3: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
