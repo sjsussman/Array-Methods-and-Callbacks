@@ -17,15 +17,16 @@ const filteredObj = fifaData.filter(function(item){
     return item.Year === 2014 && item.Stage ==='Final';
 });
 
-const winner = filteredObj.forEach(function(item){
-    return item.Year === 2014 && item.Stage ==='Final';
-});
 
 console.log(filteredObj[0]['Home Team Name']);
 console.log(filteredObj[0]['Away Team Name']);
 console.log(filteredObj[0]['Home Team Goals']);
 console.log(filteredObj[0]['Away Team Goals']);
-console.log(filteredObj[0]['Win conditions']);
+if (filteredObj[0]['Home Team Goals'] > filteredObj[0]['Away Team Goals']) {
+    console.log(`The winner is ${filteredObj[0]['Home Team Name']}`)
+    } else {
+        console.log(`The winner is ${filteredObj[0]['Away Team Name']}`)
+    };
 
 /* Task 2: Create a function called  getFinals that takes `data` as an argument and returns an array of objects with only finals data */
 
@@ -78,21 +79,49 @@ Parameters:
  * callback function getYears
  */
 
-//function getWinnersByYear(getWinners, getYears, data) {
 
-//};
 
-//getWinnersByYear(getWinners, getYears, data);
+
+// function getWinnersByYear(getWinners, getYears, getFinals, data) {
+//     let finals = getFinals(data);
+//     let years = 
+//     let winners = 
+//     finals.map(function(item){
+//         return `In ${item.years}, ${item.winners} won the world cup!`
+//     });
+//     return finals;
+// };
+
+// console.log(getWinnersByYear(getWinners, getYears, getFinals, fifaData));
+
+
+
+
 
 /* Task 6: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
-function getAverageGoals(/* code here */) {
 
-    /* code here */
 
+
+
+function getAverageGoals(data) {
+let average = {};
+    const averageAway = data.reduce(function(accumulator, item){
+        return (item['Away Team Goals'] + accumulator) / data.length;
+    }, 0);
+
+    const averageHome = data.reduce(function(accumulator, item){
+        return (item['Home Team Goals'] + accumulator) / data.length;
+    }, 0);
+    console.log(averageHome);
+console.log(averageAway);
 };
 
-getAverageGoals();
+getAverageGoals(fifaData);
+
+
+
+
 
 /// STRETCH 🥅 //
 
